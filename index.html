@@ -4,73 +4,206 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mi Planta Inteligente</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
+    :root {
+      --primary: #4e9475;
+      --primary-dark: #3e7d63;
+      --secondary: #f8d56b;
+      --light: #f0f4f3;
+      --dark: #333;
+      --white: #fff;
+      --warning: #ffc107;
+      --success: #28a745;
+      --danger: #dc3545;
+      --info: #17a2b8;
+    }
+    
     body {
       font-family: 'Nunito', sans-serif;
-      background: #f0f4f3;
-      color: #333;
+      background: linear-gradient(135deg, #f0f4f3 0%, #e0ece8 100%);
+      color: var(--dark);
+      min-height: 100vh;
       padding: 2em;
       text-align: center;
     }
-    h1 { color: #4e9475; }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 2em;
-      max-width: 400px;
-      margin: auto;
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .team-logo {
+      height: 80px;
+      width: auto;
+      border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    button {
-      padding: 0.8em 1.5em;
-      font-size: 1em;
-      border: none;
-      border-radius: 8px;
-      background-color: #4e9475;
-      color: white;
-      cursor: pointer;
-      margin-top: 1em;
-      transition: background-color 0.3s;
+    
+    h1 {
+      color: var(--primary);
+      font-size: 2.5rem;
+      margin: 0;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
     }
-    button:hover { background-color: #3e7d63; }
-    button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
+    
+    .subtitle {
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
     }
+    
+    .dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2em;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+    
+    .card-title {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .card-title i {
+      font-size: 1.8rem;
+    }
+    
+    .sensor-data {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .sensor-item {
+      background: rgba(78, 148, 117, 0.1);
+      border-radius: 12px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .sensor-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .sensor-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    
+    .sensor-label {
+      font-size: 0.9rem;
+      color: var(--dark);
+      opacity: 0.8;
+    }
+    
     .status {
       margin: 0.5em 0;
-      padding: 0.5em;
-      border-radius: 6px;
-    }
-    .auto { background-color: #e6f7ff; }
-    .manual { background-color: #fff7e6; }
-    .error {
-      color: #ff4d4f;
-      margin-top: 1em;
-    }
-    .manual-control {
-      margin-top: 1.5em;
-      padding: 1em;
-      border: 1px solid #ddd;
+      padding: 0.8em;
       border-radius: 8px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
+    
+    .auto { 
+      background-color: rgba(23, 162, 184, 0.1);
+      color: var(--info);
+    }
+    
+    .manual { 
+      background-color: rgba(255, 193, 7, 0.1);
+      color: var(--warning);
+    }
+    
+    .error {
+      color: var(--danger);
+      margin-top: 1em;
+      font-weight: 600;
+    }
+    
+    .manual-control {
+      margin-top: 2em;
+      padding: 1.5em;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.7);
+    }
+    
     .manual-active {
-      background-color: #fff7e6;
-      border-color: #ffd166;
+      background-color: rgba(255, 193, 7, 0.05);
+      border-color: var(--secondary);
     }
+    
+    .control-title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .switch-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
     .switch {
       position: relative;
       display: inline-block;
       width: 60px;
       height: 34px;
-      margin: 0 10px;
     }
+    
     .switch input { 
       opacity: 0;
       width: 0;
       height: 0;
     }
+    
     .slider {
       position: absolute;
       cursor: pointer;
@@ -82,6 +215,7 @@
       transition: .4s;
       border-radius: 34px;
     }
+    
     .slider:before {
       position: absolute;
       content: "";
@@ -93,36 +227,178 @@
       transition: .4s;
       border-radius: 50%;
     }
+    
     input:checked + .slider {
-      background-color: #4e9475;
+      background-color: var(--primary);
     }
+    
     input:checked + .slider:before {
       transform: translateX(26px);
+    }
+    
+    .mode-label {
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .alert {
+      padding: 1em;
+      border-radius: 10px;
+      margin: 1em 0;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .alert-warning {
+      background-color: rgba(255, 193, 7, 0.2);
+      color: #856404;
+      border: 1px solid rgba(255, 193, 7, 0.3);
+    }
+    
+    .alert-success {
+      background-color: rgba(40, 167, 69, 0.2);
+      color: #155724;
+      border: 1px solid rgba(40, 167, 69, 0.3);
+    }
+    
+    .btn {
+      padding: 0.8em 1.5em;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--primary);
+      color: white;
+      cursor: pointer;
+      margin-top: 1em;
+      transition: all 0.3s;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 180px;
+    }
+    
+    .btn:hover { 
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .btn-warning {
+      background-color: var(--warning);
+      color: var(--dark);
+    }
+    
+    .btn-warning:hover {
+      background-color: #e0a800;
+    }
+    
+    .footer {
+      margin-top: 3rem;
+      color: var(--dark);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .sensor-data {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Sistema de Riego Automatizado</h1>
-  <div class="card">
-    <p>💧 <strong>Humedad:</strong> <span id="moisture">--</span>%</p>
-    <p>🚿 <strong>Bomba:</strong> <span id="pump">--</span></p>
-    <p>🔆 <strong>LED:</strong> <span id="led">--</span></p>
-    <p>⚙️ <strong>Modo:</strong> <span id="mode" class="status auto">Automático</span></p>
-    <p>⚠️ <strong>Sobreuso de bomba:</strong> <span id="overuse">Todo bien</span></p>
-    
-    <div id="manualControl" class="manual-control">
-      <p>🧑‍💻 <strong>Control de Modo:</strong></p>
-      <label class="switch">
-        <input type="checkbox" id="modeToggle">
-        <span class="slider"></span>
-      </label>
-      <p id="modeStatus">Automático</p>
-      
-      <p>🚿 <strong>Control manual de bomba:</strong></p>
-      <button id="togglePump" disabled>Cargando...</button>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>Sistema de Riego Inteligente</h1>
+        <p class="subtitle">Monitoreo y control en tiempo real</p>
+      </div>
+      <img src="wtrdrgn.jpg" alt="Logo del equipo Water Dragon" class="team-logo">
     </div>
     
-    <p id="error" class="error"></p>
+    <div class="dashboard">
+      <div class="card">
+        <div class="card-title">
+          <i class="fas fa-leaf"></i>
+          <span>Estado Actual</span>
+        </div>
+        
+        <div class="sensor-data">
+          <div class="sensor-item">
+            <i class="fas fa-tint sensor-icon"></i>
+            <div class="sensor-value" id="moisture">--</div>
+            <div class="sensor-label">Humedad del suelo</div>
+          </div>
+          
+          <div class="sensor-item">
+            <i class="fas fa-water sensor-icon"></i>
+            <div class="sensor-value" id="pump">--</div>
+            <div class="sensor-label">Estado de la bomba</div>
+          </div>
+          
+          <div class="sensor-item">
+            <i class="fas fa-lightbulb sensor-icon"></i>
+            <div class="sensor-value" id="led">--</div>
+            <div class="sensor-label">Iluminación LED</div>
+          </div>
+          
+          <div class="sensor-item">
+            <i class="fas fa-cogs sensor-icon"></i>
+            <div class="sensor-value" id="mode">Automático</div>
+            <div class="sensor-label">Modo de operación</div>
+          </div>
+        </div>
+        
+        <div id="pumpStatus" class="alert alert-success">
+          <i class="fas fa-check-circle"></i>
+          <span id="overuse">Operación normal</span>
+        </div>
+        
+        <div id="manualControl" class="manual-control">
+          <div class="control-title">
+            <i class="fas fa-user-cog"></i>
+            <span>Control Manual</span>
+          </div>
+          
+          <div class="switch-container">
+            <span class="mode-label">Automático</span>
+            <label class="switch">
+              <input type="checkbox" id="modeToggle">
+              <span class="slider"></span>
+            </label>
+            <span class="mode-label">Manual</span>
+          </div>
+          
+          <button id="togglePump" class="btn btn-warning" disabled>
+            <i class="fas fa-power-off"></i>
+            <span>Cargando...</span>
+          </button>
+        </div>
+        
+        <p id="error" class="error"></p>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>Sistema desarrollado por el equipo Water Dragon | © 2023</p>
+    </div>
   </div>
 
   <script type="module">
@@ -142,9 +418,9 @@
     const ledEl = document.getElementById('led');
     const modeEl = document.getElementById('mode');
     const overuseEl = document.getElementById('overuse');
+    const pumpStatusEl = document.getElementById('pumpStatus');
     const toggleBtn = document.getElementById('togglePump');
     const modeToggle = document.getElementById('modeToggle');
-    const modeStatus = document.getElementById('modeStatus');
     const manualControl = document.getElementById('manualControl');
     const errorEl = document.getElementById('error');
 
@@ -167,8 +443,19 @@
 
     onValue(refs.pump, snap => {
       pumpState = snap.val() === true;
-      pumpEl.textContent = pumpState ? 'Activada' : 'Desactivada';
-      toggleBtn.textContent = pumpState ? 'Apagar Bomba' : 'Encender Bomba';
+      pumpEl.textContent = pumpState ? 'ACTIVA' : 'INACTIVA';
+      const btnIcon = document.querySelector('#togglePump i');
+      const btnText = document.querySelector('#togglePump span');
+      
+      if (pumpState) {
+        btnIcon.className = 'fas fa-power-off';
+        btnText.textContent = 'Apagar Bomba';
+        toggleBtn.classList.add('btn-warning');
+      } else {
+        btnIcon.className = 'fas fa-power-off';
+        btnText.textContent = 'Encender Bomba';
+        toggleBtn.classList.remove('btn-warning');
+      }
     }, () => showError("Error al leer bomba"));
 
     onValue(refs.led, snap => {
@@ -177,19 +464,27 @@
 
     onValue(refs.mode, snap => {
       isManual = snap.val() === true;
-      modeEl.textContent = isManual ? 'Manual' : 'Automático';
-      modeEl.className = `status ${isManual ? 'manual' : 'auto'}`;
+      modeEl.textContent = isManual ? 'MANUAL' : 'AUTOMÁTICO';
+      modeEl.className = isManual ? 'manual' : 'auto';
       modeToggle.checked = isManual;
-      modeStatus.textContent = isManual ? 'Manual' : 'Automático';
       manualControl.className = isManual ? 'manual-control manual-active' : 'manual-control';
-      toggleBtn.disabled = false;
+      toggleBtn.disabled = !isManual;
     }, () => showError("Error al leer modo"));
 
     onValue(refs.overuse, snap => {
       const val = snap.val();
-      overuseEl.textContent = val === true ? '⚠️ Sí, bomba sobreusada' : 'Todo bien';
-      overuseEl.style.color = val === true ? '#ff4d4f' : '#4e9475';
-    }, () => showError("Error al leer sobreuso"));
+      const icon = document.querySelector('#pumpStatus i');
+      
+      if (val === true) {
+        overuseEl.textContent = 'Bomba en período de espera (sobreuso)';
+        pumpStatusEl.className = 'alert alert-warning';
+        icon.className = 'fas fa-exclamation-triangle';
+      } else {
+        overuseEl.textContent = 'Operación normal';
+        pumpStatusEl.className = 'alert alert-success';
+        icon.className = 'fas fa-check-circle';
+      }
+    }, () => showError("Error al leer estado de bomba"));
 
     // Control de modo
     modeToggle.addEventListener('change', async () => {
@@ -208,7 +503,8 @@
     toggleBtn.addEventListener('click', async () => {
       try {
         toggleBtn.disabled = true;
-        toggleBtn.textContent = 'Procesando...';
+        const btnText = document.querySelector('#togglePump span');
+        btnText.textContent = 'Procesando...';
         await set(refs.remotePump, !pumpState);
       } catch {
         showError("No se pudo cambiar el estado de la bomba");
@@ -218,7 +514,7 @@
     });
 
     function showError(msg) {
-      errorEl.textContent = msg;
+      errorEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${msg}`;
       setTimeout(() => errorEl.textContent = '', 4000);
     }
   </script>
