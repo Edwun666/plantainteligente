@@ -3,154 +3,160 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Planta Inteligente</title>
+  <title>Sistema de Riego Automático</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
-      --primary: #4e9475;
-      --primary-dark: #3e7d63;
-      --secondary: #f8d56b;
-      --light: #f0f4f3;
-      --dark: #333;
-      --white: #fff;
-      --warning: #ffc107;
-      --success: #28a745;
-      --danger: #dc3545;
-      --info: #17a2b8;
+      --primary: #2a6f7a;         /* Verde azulado profundo */
+      --primary-dark: #1d4e56;    /* Versión más oscura del primario */
+      --secondary: #f8a145;       /* Naranja dorado para acentos */
+      --accent: #d94e41;          /* Rojo coral para detalles importantes */
+      --light: #e8f4f8;          /* Azul claro muy suave para fondos */
+      --dark: #1a2e35;           /* Azul oscuro casi negro para texto */
+      --white: #ffffff;
+      --warning: #f8a145;        /* Usando el secundario para advertencias */
+      --success: #4e9475;        /* Verde similar al original */
+      --danger: #d94e41;         /* Usando el acento rojo */
+      --info: #2a6f7a;           /* Usando el primario */
     }
     
     body {
       font-family: 'Nunito', sans-serif;
-      background: linear-gradient(135deg, #f0f4f3 0%, #e0ece8 100%);
+      background: linear-gradient(135deg, #e8f4f8 0%, #d1e8f0 100%);
       color: var(--dark);
       min-height: 100vh;
-      padding: 2em;
+      padding: 1em;
       text-align: center;
     }
     
     .container {
-      max-width: 1200px;
+      max-width: 100%;
+      width: 100%;
       margin: 0 auto;
-      padding: 20px;
+      padding: 10px;
     }
     
     .header {
       display: flex;
-      justify-content: space-between;
+      flex-direction: row;
       align-items: center;
-      margin-bottom: 2rem;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    
+    .header-text {
+      text-align: left;
+      margin-right: 20px;
+      flex-grow: 1;
     }
     
     .team-logo {
-      height: 80px;
+      height: 100px;  /* Aumentado de 70px a 100px */
       width: auto;
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(26, 46, 53, 0.2);
+      border: 2px solid var(--secondary);
+      margin-left: 0;
     }
     
     h1 {
       color: var(--primary);
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       margin: 0;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-    }
-    
-    .subtitle {
-      color: var(--primary-dark);
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
     }
     
     .dashboard {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
     }
     
     .card {
       background: var(--white);
-      border-radius: 16px;
-      padding: 2em;
+      border-radius: 12px;
+      padding: 1.5em;
       width: 100%;
       max-width: 500px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
     }
     
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(42, 111, 122, 0.2);
     }
     
     .card-title {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: var(--primary);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    
-    .card-title i {
-      font-size: 1.8rem;
-    }
-    
-    .sensor-data {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    
-    .sensor-item {
-      background: rgba(78, 148, 117, 0.1);
-      border-radius: 12px;
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .sensor-icon {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-    }
-    
-    .sensor-value {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-    }
-    
-    .sensor-label {
-      font-size: 0.9rem;
-      color: var(--dark);
-      opacity: 0.8;
-    }
-    
-    .status {
-      margin: 0.5em 0;
-      padding: 0.8em;
-      border-radius: 8px;
-      font-weight: 600;
+      margin-bottom: 1.2rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
     }
     
+    .card-title i {
+      font-size: 1.5rem;
+    }
+    
+    .sensor-data {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .sensor-item {
+      background: rgba(42, 111, 122, 0.1);
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .sensor-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .sensor-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    
+    .sensor-label {
+      font-size: 0.85rem;
+      color: var(--dark);
+      opacity: 0.8;
+    }
+    
+    .status {
+      margin: 0.5em 0;
+      padding: 0.7em;
+      border-radius: 8px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+    
     .auto { 
-      background-color: rgba(23, 162, 184, 0.1);
+      background-color: rgba(42, 111, 122, 0.1);
       color: var(--info);
     }
     
     .manual { 
-      background-color: rgba(255, 193, 7, 0.1);
+      background-color: rgba(248, 161, 69, 0.1);
       color: var(--warning);
     }
     
@@ -158,44 +164,45 @@
       color: var(--danger);
       margin-top: 1em;
       font-weight: 600;
+      font-size: 0.9rem;
     }
     
     .manual-control {
-      margin-top: 2em;
-      padding: 1.5em;
+      margin-top: 1.5em;
+      padding: 1.2em;
       border: 1px solid rgba(0,0,0,0.1);
-      border-radius: 12px;
+      border-radius: 10px;
       background: rgba(255,255,255,0.7);
     }
     
     .manual-active {
-      background-color: rgba(255, 193, 7, 0.05);
+      background-color: rgba(248, 161, 69, 0.05);
       border-color: var(--secondary);
     }
     
     .control-title {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
       color: var(--primary-dark);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
     }
     
     .switch-container {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
     }
     
     .switch {
       position: relative;
       display: inline-block;
-      width: 60px;
-      height: 34px;
+      width: 50px;
+      height: 28px;
     }
     
     .switch input { 
@@ -213,14 +220,14 @@
       bottom: 0;
       background-color: #ccc;
       transition: .4s;
-      border-radius: 34px;
+      border-radius: 28px;
     }
     
     .slider:before {
       position: absolute;
       content: "";
-      height: 26px;
-      width: 26px;
+      height: 20px;
+      width: 20px;
       left: 4px;
       bottom: 4px;
       background-color: white;
@@ -233,59 +240,38 @@
     }
     
     input:checked + .slider:before {
-      transform: translateX(26px);
+      transform: translateX(22px);
     }
     
     .mode-label {
       font-weight: 600;
       color: var(--dark);
-    }
-    
-    .alert {
-      padding: 1em;
-      border-radius: 10px;
-      margin: 1em 0;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    
-    .alert-warning {
-      background-color: rgba(255, 193, 7, 0.2);
-      color: #856404;
-      border: 1px solid rgba(255, 193, 7, 0.3);
-    }
-    
-    .alert-success {
-      background-color: rgba(40, 167, 69, 0.2);
-      color: #155724;
-      border: 1px solid rgba(40, 167, 69, 0.3);
+      font-size: 0.9rem;
     }
     
     .btn {
-      padding: 0.8em 1.5em;
-      font-size: 1em;
+      padding: 0.7em 1.2em;
+      font-size: 0.9em;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       background-color: var(--primary);
       color: white;
       cursor: pointer;
-      margin-top: 1em;
+      margin-top: 0.8em;
       transition: all 0.3s;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      min-width: 180px;
+      gap: 6px;
+      min-width: 150px;
+      border: 1px solid var(--primary-dark);
     }
     
     .btn:hover { 
       background-color: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(42, 111, 122, 0.3);
     }
     
     .btn:disabled {
@@ -293,32 +279,58 @@
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
+      border-color: #999;
     }
     
     .btn-warning {
-      background-color: var(--warning);
+      background-color: var(--secondary);
       color: var(--dark);
+      border-color: #e69138;
     }
     
     .btn-warning:hover {
-      background-color: #e0a800;
+      background-color: #e69138;
     }
     
-    .footer {
-      margin-top: 3rem;
-      color: var(--dark);
-      opacity: 0.7;
-      font-size: 0.9rem;
-    }
-    
-    @media (max-width: 768px) {
-      .header {
-        flex-direction: column;
-        gap: 1rem;
+    @media (min-width: 768px) {
+      body {
+        padding: 1.5em;
       }
       
-      .sensor-data {
-        grid-template-columns: 1fr;
+      .container {
+        max-width: 1200px;
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .card {
+        padding: 2em;
+        border-radius: 16px;
+      }
+      
+      .card-title {
+        font-size: 1.5rem;
+      }
+      
+      .team-logo {
+        height: 120px;  /* Aumentado de 80px a 120px */
+      }
+    }
+    
+    @media (min-width: 992px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .card {
+        max-width: 600px;
+      }
+      
+      .team-logo {
+        height: 140px;  /* Aumentado para pantallas grandes */
       }
     }
   </style>
@@ -326,11 +338,10 @@
 <body>
   <div class="container">
     <div class="header">
-      <div>
-        <h1>Sistema de Riego Inteligente</h1>
-        <p class="subtitle">Monitoreo y control en tiempo real</p>
+      <div class="header-text">
+        <h1>Sistema de Riego Automático</h1>
       </div>
-      <img src="wtrdrgn.jpg" alt="Logo del equipo Water Dragon" class="team-logo">
+      <img src="wtrdrgn.jpg" alt="Logo Water Dragon" class="team-logo">
     </div>
     
     <div class="dashboard">
@@ -366,11 +377,6 @@
           </div>
         </div>
         
-        <div id="pumpStatus" class="alert alert-success">
-          <i class="fas fa-check-circle"></i>
-          <span id="overuse">Operación normal</span>
-        </div>
-        
         <div id="manualControl" class="manual-control">
           <div class="control-title">
             <i class="fas fa-user-cog"></i>
@@ -395,10 +401,6 @@
         <p id="error" class="error"></p>
       </div>
     </div>
-    
-    <div class="footer">
-      <p>Sistema desarrollado por el equipo Water Dragon | © 2023</p>
-    </div>
   </div>
 
   <script type="module">
@@ -417,8 +419,6 @@
     const pumpEl = document.getElementById('pump');
     const ledEl = document.getElementById('led');
     const modeEl = document.getElementById('mode');
-    const overuseEl = document.getElementById('overuse');
-    const pumpStatusEl = document.getElementById('pumpStatus');
     const toggleBtn = document.getElementById('togglePump');
     const modeToggle = document.getElementById('modeToggle');
     const manualControl = document.getElementById('manualControl');
@@ -429,8 +429,7 @@
       pump: ref(db, 'Bomba'),
       led: ref(db, 'Estado_LED'),
       mode: ref(db, 'Control/ModoManual'),
-      remotePump: ref(db, 'Control/BombaRemota'),
-      overuse: ref(db, 'Alertas/BombaSobreuso')
+      remotePump: ref(db, 'Control/BombaRemota')
     };
 
     let isManual = false;
@@ -470,21 +469,6 @@
       manualControl.className = isManual ? 'manual-control manual-active' : 'manual-control';
       toggleBtn.disabled = !isManual;
     }, () => showError("Error al leer modo"));
-
-    onValue(refs.overuse, snap => {
-      const val = snap.val();
-      const icon = document.querySelector('#pumpStatus i');
-      
-      if (val === true) {
-        overuseEl.textContent = 'Bomba en período de espera (sobreuso)';
-        pumpStatusEl.className = 'alert alert-warning';
-        icon.className = 'fas fa-exclamation-triangle';
-      } else {
-        overuseEl.textContent = 'Operación normal';
-        pumpStatusEl.className = 'alert alert-success';
-        icon.className = 'fas fa-check-circle';
-      }
-    }, () => showError("Error al leer estado de bomba"));
 
     // Control de modo
     modeToggle.addEventListener('change', async () => {
